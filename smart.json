@@ -1,0 +1,11 @@
+{
+    "name": "baseView",
+    "description": "Famo.us baseView for Meteor",
+    "homepage": "",
+    "author": "Theo Robbertze <theo.robbertze> (http://www.strollalot.co.za)",
+    "version": "0.0.1",
+    "git": "",
+    "packages": {
+        "famono": {}
+    }
+}
