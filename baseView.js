@@ -5,6 +5,7 @@ BaseView = function(kwargs) {
 	var View         = require('famous/core/View');
 	var RenderNode   = require('famous/core/RenderNode');
 	var Transitionable   = require('famous/transitions/Transitionable');
+	require('famous/inputs/FastClick');
 	// ---------------------------------------------------------------------------
 	function _BaseView(kwargs) {
 		View.apply(this, arguments);
@@ -14,7 +15,6 @@ BaseView = function(kwargs) {
 			content: kwargs.content,
 			properties: {
 				color: "#000",
-				border: "1px solid #e1e8ee",
 				padding: "2em"
 			}
 		});
@@ -22,14 +22,20 @@ BaseView = function(kwargs) {
 		this.hingeTransitionable = new Transitionable(-Math.PI / 2);
 		this.hinge = new Modifier();
 		this.hinge.transformFrom(function() {
-			return Transform.rotateY(this.hingeTransitionable.get())
+			return Transform.rotateY(this.hingeTransitionable.get());
 		}.bind(this));
 
 		this.layout = new RenderNode();
-		this.layout.add(new Modifier({transform: Transform.translate(0, 0, -1)})).add(this.backing);
+		this.layout.add(
+			new Modifier(
+				{
+					transform: Transform.translate(0, 0, -1)
+				}
+			)
+		).add(this.backing);
 
 		this.add(this.backing);
-	};
+	}
 	// ---------------------------------------------------------------------------
 	_BaseView.prototype = Object.create(View.prototype);
 	_BaseView.prototype.constructor = _BaseView;
